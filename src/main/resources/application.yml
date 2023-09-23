@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    password: noygut
+    url: jdbc:postgresql://localhost:5432/noygut
+    username: postgres
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: update
+
+security:
+  jwt:
+    secret: 0K8g0YHQsNC80YvQuSDQutGA0LDRgdC40LLRi9C5INC90LAg0YHQstC10YLQtQ==
+
+server:
+  port: 5000
