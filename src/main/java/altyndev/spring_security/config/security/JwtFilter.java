@@ -1,4 +1,4 @@
-package altyndev.spring_security.config;
+package altyndev.spring_security.config.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

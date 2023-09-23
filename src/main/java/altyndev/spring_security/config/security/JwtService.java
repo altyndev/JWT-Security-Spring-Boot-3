@@ -1,4 +1,4 @@
-package altyndev.spring_security.config;
+package altyndev.spring_security.config.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

@@ -1,4 +1,4 @@
-package altyndev.spring_security.config;
+package altyndev.spring_security.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -39,31 +39,21 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth.requestMatchers(publicEndpoints()).permitAll()
                         .anyRequest().authenticated())
-                .exceptionHandling(exceptionHandling -> exceptionHandling
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            if (authException instanceof BadCredentialsException) {
-                                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                                response.getWriter().write("Wrong password");
-                            } else if (authException instanceof UsernameNotFoundException) {
-                                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                                response.getWriter().write("User not found 1");
-                            } else {
-                                response.setStatus(HttpStatus.UNAUTHORIZED.value());
-                                response.getWriter().write("Unauthorized.");
-                            }
-                        }))
+                //    .exceptionHandling(exceptionHandling -> exceptionHandling
+//                        .authenticationEntryPoint((request, response, authException) -> {
+//                            if (authException instanceof BadCredentialsException) {
+//                                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//                                response.getWriter().write("Wrong password");
+//                            } else if (authException instanceof UsernameNotFoundException) {
+//                                response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//                                response.getWriter().write("User not found 1");
+//                            }
+//                        }))
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();
-    }
-
-    private RequestMatcher publicEndpoints() {
-
-        return new OrRequestMatcher(
-                new AntPathRequestMatcher("/api/auth/**")
-        );
     }
 
     @Bean
@@ -81,5 +71,22 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", corsConfiguration);
 
         return source;
+    }
+
+    private RequestMatcher publicEndpoints() {
+
+        return new OrRequestMatcher(
+                new AntPathRequestMatcher("/api/auth/**"),
+                new AntPathRequestMatcher("/v2/api-docs"),
+                new AntPathRequestMatcher("/v3/api-docs"),
+                new AntPathRequestMatcher("/v3/api-docs/**"),
+                new AntPathRequestMatcher("/swagger-resources"),
+                new AntPathRequestMatcher("/swagger-resources/**"),
+                new AntPathRequestMatcher("/configuration/ui"),
+                new AntPathRequestMatcher("/configuration/security"),
+                new AntPathRequestMatcher("/swagger-ui/**"),
+                new AntPathRequestMatcher("/webjars/**"),
+                new AntPathRequestMatcher("/swagger-ui.html")
+        );
     }
 }

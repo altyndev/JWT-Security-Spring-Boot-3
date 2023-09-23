@@ -1,6 +1,6 @@
 package altyndev.spring_security.service.impl;
 
-import altyndev.spring_security.config.JwtService;
+import altyndev.spring_security.config.security.JwtService;
 import altyndev.spring_security.dto.AuthResponse;
 import altyndev.spring_security.dto.AuthenticateRequest;
 import altyndev.spring_security.dto.RegisterRequest;

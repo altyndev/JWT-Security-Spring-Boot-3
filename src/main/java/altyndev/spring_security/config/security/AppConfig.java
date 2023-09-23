@@ -1,4 +1,4 @@
-package altyndev.spring_security.config;
+package altyndev.spring_security.config.security;
 
 import altyndev.spring_security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +34,14 @@ public class AppConfig {
 //
 //        return authenticationProvider;
 //    }
+
     @Bean
     public AuthenticationProvider authenticationProvider() {
+
         CustomAuthenticationProvider authenticationProvider = new CustomAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
+
         return authenticationProvider;
     }
 

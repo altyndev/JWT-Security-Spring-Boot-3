@@ -1,4 +1,4 @@
-package altyndev.spring_security.config;
+package altyndev.spring_security.config.security;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,4 +25,3 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
         }
     }
 }
-
